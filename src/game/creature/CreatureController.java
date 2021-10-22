@@ -5,4 +5,10 @@ public class CreatureController implements Runnable{
     public void run() {
 
     }
+
+    public CreatureController(Creature Enemy){
+
+    }
+
+
 }
