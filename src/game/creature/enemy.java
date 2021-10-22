@@ -38,6 +38,8 @@ public class enemy extends Creature{
         equipments.add(armour);
         this.x = x;
         this.y = y;
+
+
     }
 
     public void showStats(){
