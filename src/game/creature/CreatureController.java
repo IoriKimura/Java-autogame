@@ -8,6 +8,7 @@ public class CreatureController implements Runnable {
 
     @Override
     public void run() {
+
         position();
         if(chekPostion() && !isFight)
             fight();
@@ -17,15 +18,22 @@ public class CreatureController implements Runnable {
     public Player player;
     public int mapSize = 3;
     public boolean isFight = false;
+    public int index;
 
-    public CreatureController(enemy enemy, Player player) {
+    public CreatureController(enemy enemy, Player player, int index) {
         this.player = player;
         this.enemy = enemy;
+        this.index = index;
     }
 
     public boolean chekPostion(){
-        Boolean theSame = false;
+        boolean theSame = false;
         if (enemy.getY() == player.getY() && enemy.getX() == player.getX()) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             enemy.showStats();
             theSame = true;
         }
@@ -35,17 +43,17 @@ public class CreatureController implements Runnable {
     public void position(){
         Random rnd = new Random();
 
-        if((enemy.getX() + 1) >= mapSize){
+        if(enemy.getX()+1 >= mapSize){
             enemy.setX(enemy.getX()-1);
         }
-        if((enemy.getX() - 1) <= 0){
+        if(enemy.getX()-1 <= 0){
             enemy.setX(enemy.getX()+1);
         }
 
-        if((enemy.getY()+1) >= mapSize){
+        if(enemy.getY()+1 >= mapSize){
             enemy.setY(enemy.getY()-1);
         }
-        if((enemy.getY()-1) <= 0){
+        if(enemy.getY()-1 <= 0){
             enemy.setY(enemy.getY()+1);
         }
 
@@ -63,31 +71,37 @@ public class CreatureController implements Runnable {
 
     public void fight(){
         isFight = true;
-        GameLogic gl = new GameLogic();
         while(player.getHp() > 0){
-            if(player.getHp() <= 0)
+            if(player.getHp() <= 0) {
                 System.out.println("You was killed... Bruh...");
-                System.exit(0);
+                GameLogic.setAlive(false);
+                break;
+            }
             if(enemy.getHp() <= 0) {
+                enemy.setHp(0);
                 System.out.println("Brutal! You smash him!");
                 isFight = false;
                 break;
             }
 
             while(enemy.getHp() > 0){
-                enemy.setHp(gl.takeDMG(enemy.getHp(), gl.setFullDps(enemy.armour.getArmour(), player.weapon.getDamage(), player.getAtk())));
+                enemy.setHp(GameLogic.takeDMG(enemy.getHp(), GameLogic.setFullDps(enemy.armour.getArmour(), player.weapon.getDamage(), player.getAtk())));
                 if(enemy.getHp() <= 0) {
                     System.out.println("Brutal! You smash him!");
                     isFight = false;
                     break;
                 }
                 else
-                    player.setHp(gl.takeDMG(player.getHp(), gl.setFullDps((player.armour.getArmour()),enemy.weapon.getDamage(), enemy.getAtk())));
+                    player.setHp(GameLogic.takeDMG(player.getHp(), GameLogic.setFullDps((player.armour.getArmour()),enemy.weapon.getDamage(), enemy.getAtk())));
                     if(player.getHp() <= 0) {
                         System.out.println("You was killed... Bruh...");
-                        System.exit(0);
+                        enemy.setHp(0);
+                        GameLogic.setAlive(false);
+                        break;
                     }
             }
         }
+        GameLogic.setEnemyAmount(GameLogic.getEnemyAmount()-1);
+        GameLogic.seteList(enemy);
     }
 }

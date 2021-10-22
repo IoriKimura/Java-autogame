@@ -8,7 +8,7 @@ import java.util.Random;
 public class Player extends Creature{
     public Weapon weapon;
     public Armour armour;
-    public int mapSize = 3; //Не забыть поменять на передачу из GL;
+    public int mapSize; //Не забыть поменять на передачу из GL;
 
     private int x,y;
     //Getters
@@ -27,14 +27,14 @@ public class Player extends Creature{
         this.y = y;
     }
 
-    public Player(String name, int hp, int lvl, int atk, int exp, Armour armour, Weapon weapon){
+    public Player(String name, int hp, int lvl, int atk, int exp, Armour armour, Weapon weapon, int mapSize, int x, int y){
         super(name, hp, lvl, atk, exp);
         this.armour = armour;
         this.weapon = weapon;
         Random rnd = new Random();
-
-        this.x = rnd.nextInt(mapSize);
-        this.y = rnd.nextInt(mapSize);
+        this.mapSize = mapSize;
+        this.x = x;
+        this.y = y;
     }
 
     public void showStats(){
@@ -47,17 +47,17 @@ public class Player extends Creature{
     public void walking(){
         Random rnd = new Random();
 
-        if((getX() + 1) >= mapSize){
+        if(getX()+1 >= mapSize){
             setX(getX()-1);
         }
-        if((getX() - 1) <= 0){
+        if(getX()-1 <= 0){
             setX(getX()+1);
         }
 
-        if((getY()+1) >= mapSize){
+        if(getY()+1 >= mapSize){
             setY(getY()-1);
         }
-        if((getY()-1) <= 0){
+        if(getY()-1 <= 0){
             setY(getY()+1);
         }
 
