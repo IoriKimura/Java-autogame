@@ -1,29 +1,27 @@
 package game.creature;
-
 import game.main.GameLogic;
-
 import java.util.Random;
 
 public class CreatureController implements Runnable {
 
+    public enemy enemy;
+    public Player player;
+    public int mapSize;
+    public boolean isFight = false;
+    public int index;
+
     @Override
     public void run() {
-
         position();
         if(chekPostion() && !isFight)
             fight();
     }
 
-    public enemy enemy;
-    public Player player;
-    public int mapSize = 3;
-    public boolean isFight = false;
-    public int index;
-
-    public CreatureController(enemy enemy, Player player, int index) {
+    public CreatureController(enemy enemy, Player player, int index, int mapSize) {
         this.player = player;
         this.enemy = enemy;
         this.index = index;
+        this.mapSize = mapSize;
     }
 
     public boolean chekPostion(){
@@ -34,7 +32,6 @@ public class CreatureController implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            enemy.showStats();
             theSame = true;
         }
         return theSame;
@@ -71,9 +68,10 @@ public class CreatureController implements Runnable {
 
     public void fight(){
         isFight = true;
+        System.out.println("YOUR ENEMY IS " + enemy.getName());
         while(player.getHp() > 0){
-            if(player.getHp() <= 0) {
-                System.out.println("You was killed... Bruh...");
+            if(player.getHp() == 0) {
+                System.out.println(enemy.getName() + " killed you!");
                 GameLogic.setAlive(false);
                 break;
             }

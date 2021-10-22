@@ -36,16 +36,14 @@ public class enemy extends Creature{
         this.armour = equipment2;
         equipments.add(weapon);
         equipments.add(armour);
-        Random rnd = new Random();
         this.x = x;
         this.y = y;
     }
 
     public void showStats(){
-        System.out.println("Enemy's name is " + getName()+ "\n" + "Enemy's hp is " + getHp()
-                + "\n" + "Enemy's level is " + getLvl()
-                + "\n" + "Enemy's personal power is " + getAtk()
-                + "\n..........");
+        System.out.println("Enemy's name is " + getName()+ " || " + "HP: " + getHp()
+                + " || " + "Level: " + getLvl()
+                + " || " + "Attack power: " + getAtk());
     }
 
     public void showInventory(){

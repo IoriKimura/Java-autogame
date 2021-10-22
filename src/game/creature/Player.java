@@ -8,7 +8,7 @@ import java.util.Random;
 public class Player extends Creature{
     public Weapon weapon;
     public Armour armour;
-    public int mapSize; //Не забыть поменять на передачу из GL;
+    public int mapSize;
 
     private int x,y;
     //Getters
@@ -38,10 +38,9 @@ public class Player extends Creature{
     }
 
     public void showStats(){
-        System.out.println("Your name is " + getName() + "\n" + "Your level is " + getLvl()
-                + "\n" + "You have " + getExp() + " experience"
-                + "\n" + "Your personal power is " + getAtk()
-                + "\n..........");
+        System.out.println("Your name is " + getName() + " || " + "Your level is " + getLvl()
+                + " || " + "You have " + getExp() + " experience"
+                + " || " + "Your personal power is " + getAtk());
     }
 
     public void walking(){
@@ -64,7 +63,8 @@ public class Player extends Creature{
         if(rnd.nextBoolean()){
             setX(getX()+1);
         }else{
-            setX(getX()-1);        }
+            setX(getX()-1);
+        }
         if(rnd.nextBoolean()){
             setY(getY()+1);
         }else{

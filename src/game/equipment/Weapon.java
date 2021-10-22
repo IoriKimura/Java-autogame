@@ -16,9 +16,8 @@ public class Weapon extends Equipment{
     }
 
     public void showStats(){
-        System.out.println("Weapon's name: " + getName() + "\n" + "Weapon's damage: " + getDamage()
-                + "\n" + "Weapon's lvl: " + getLvlReq()
-                + "\n" + "Weapon's cost: " + getCost()
-                + "\n..........");
+        System.out.println("Weapon: " + getName() + " || " + "Damage: " + getDamage()
+                + " || " + "Level: " + getLvlReq()
+                + " || " + "Cost: " + getCost());
     }
 }

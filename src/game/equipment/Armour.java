@@ -17,8 +17,7 @@ public class Armour extends Equipment{
     }
 
     public void showStats(){
-        System.out.println("Armour's name: " + getName() + "\n" + "Armour's power: " + getArmour()
-                + "\n" + "Armour's lvl: " + getLvlReq()
-                + "\n..........");
+        System.out.println("Armour's name: " + getName() + " || " + "Power: " + getArmour()
+                + " || " + "Level: " + getLvlReq());
     }
 }

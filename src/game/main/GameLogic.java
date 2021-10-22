@@ -49,7 +49,7 @@ public class GameLogic {
     static void generation(){
         String[] wNames = {"Вылизанный меч смертельного испуга", "Кистень наставления на путь истины", "Меч леденящего душу взгляда",
                 "Кортик", "Усиленный пернач", "Церемониальная булава", "Дубина переговоров", "Лук Амоса", "Средний охотничий нож", "Алая сабля смерти"};
-        String[] eNames = {"Первый", "Второй", "Третий"};
+        String[] eNames = {"Садыков", "Сумкин", "Филатов"};
 
         Random rnd = new Random();
 
@@ -91,27 +91,36 @@ public class GameLogic {
         generation();
         player();
         while(alive && enemyAmount != 0){
+            System.out.println("***____***");
+            /*draw();*/
+
             player.walking();
-            System.out.println("//////////");
-            draw();
             makeThread();
+            if(!alive) {
+                System.out.println("You was so close to win them!");
+                break;
+            }
+            draw();
             wait1();
-            System.out.println("//////////");
+            System.out.println();
         }
         es.shutdown();
-
+        if(!alive)
+            System.out.println("You was so close to win them!");
+        else
+            System.out.println("You killed them all! You are a master of your work.");
     }
 
     public static void draw(){
         for(int i = 0; i < mapSize; i++){
             for(int j = 0; j < mapSize; j++){
-                field[i][j] = "0";
+                field[i][j] = ".";
             }
         }
-        field[player.getX()][player.getY()] = "\u001b[38;5;42m" + "@" + "\u001b[38;5;15m";
         for(int i = 0; i < eList.size(); i++){
             field[eList.get(i).getX()][eList.get(i).getY()] =  "\u001b[38;5;198m" + eList.get(i).getName().charAt(0) + "\u001b[38;5;15m";
         }
+        field[player.getX()][player.getY()] = "\u001b[38;5;42m" + "@" + "\u001b[38;5;15m";
         for(int i = 0; i < mapSize; i++){
             for(int j = 0; j < mapSize; j++){
                 System.out.print(field[i][j] + " ");
@@ -120,16 +129,17 @@ public class GameLogic {
         }
     }
 
-    static ExecutorService es = Executors.newCachedThreadPool();
+    static ExecutorService es = Executors.newSingleThreadExecutor();
     static void makeThread(){
         for(int i = 0; i < eList.size(); i++){
-            es.execute(new CreatureController(eList.get(i), player, i));
+            es.execute(new CreatureController(eList.get(i), player, i, mapSize));
         }
+
     }
 
     static void wait1(){
         try {
-            Thread.sleep(1500);
+                Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
