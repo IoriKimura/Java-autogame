@@ -5,12 +5,4 @@ public class CreatureController implements Runnable{
     public void run() {
 
     }
-
-    Creature creature;
-
-    public CreatureController(Creature creature){
-        this.creature = creature;
-    }
-
-
 }

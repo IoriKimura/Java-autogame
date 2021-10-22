@@ -65,7 +65,7 @@ public class GameLogic {
                 break;
             }*/
 
-            while(eList.get(index) > 0){
+            /*while(eList.get(index) > 0){
                 eList.get(index).setHp(takeDMG(eList.get(index).getHp(), setFullDps(eList.get(index).armour.getArmour(), player.weapon.getDamage(), player.getAtk())));
                 if(eList.get(index).getHp() <= 0) {
                     System.out.println("Brutal! You smash him!");
@@ -75,11 +75,15 @@ public class GameLogic {
                     player.setHp(takeDMG(player.getHp(), setFullDps((player.armour.getArmour()),eList.get(index).weapon.getDamage(), eList.get(index).getAtk())));
                     if(player.getHp() <= 0)
                         System.out.println("You was killed... Bruh...");
-            }
+            }*/
         }
         eList.remove(index);
     }
 
+    static void game(){
+        generation();
+        player();
+    }
 
 
 }

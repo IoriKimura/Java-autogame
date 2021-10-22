@@ -1,9 +1,10 @@
 package game.equipment;
 
+import java.util.ArrayList;
+
 public class Equipment {
     private int lvlReq, damage, cost;
     private String name = "Ordinary_Equipment";
-
     //Getters
     public int getDamage() {
         return damage;
