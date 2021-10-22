@@ -40,6 +40,7 @@ public class enemy extends Creature{
         this.y = y;
 
 
+
     }
 
     public void showStats(){
