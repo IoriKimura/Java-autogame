@@ -4,6 +4,7 @@ import game.creature.CreatureController;
 import game.creature.enemy;
 import game.creature.Player;
 import game.equipment.Armour;
+import game.equipment.Equipment;
 import game.equipment.Weapon;
 import java.util.ArrayList;
 import java.util.Random;
@@ -49,7 +50,7 @@ public class GameLogic {
     static void generation(){
         String[] wNames = {"Вылизанный меч смертельного испуга", "Кистень наставления на путь истины", "Меч леденящего душу взгляда",
                 "Кортик", "Усиленный пернач", "Церемониальная булава", "Дубина переговоров", "Лук Амоса", "Средний охотничий нож", "Алая сабля смерти"};
-        String[] eNames = {"Садыков", "Сумкин", "Филатов"};
+        String[] eNames = {"Christopher", "Joshua", "Daniel"};
 
         Random rnd = new Random();
 
@@ -87,13 +88,33 @@ public class GameLogic {
         return hp;
     }
 
+    public static void pickUp(Weapon eWeapon, Armour eArmour){
+        if(player.weapon.getDamage() >= eWeapon.getDamage()){
+            System.out.println("Your weapon is better!");
+        }
+        else{
+            player.weapon = eWeapon;
+            System.out.println("You've picked up " + player.weapon.getName());
+            System.out.println("New stats:");
+            player.weapon.showStats();
+        }
+
+        if(player.armour.getArmour() >= eArmour.getArmour()){
+            System.out.println("Your armour is better!");
+        }
+        else{
+            player.armour = eArmour;
+            System.out.println("You've picked up " + player.armour.getName());
+            System.out.println("New stats:");
+            player.armour.showStats();
+        }
+    }
+
     static void game(){
         generation();
         player();
         while(alive && enemyAmount != 0){
             System.out.println("***____***");
-            /*draw();*/
-
             player.walking();
             makeThread();
             if(!alive) {
