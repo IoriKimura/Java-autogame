@@ -21,6 +21,15 @@ public class enemy extends Creature{
     public int getY() {
         return y;
     }
+    public ArrayList<Equipment> getEquipments() {
+        return equipments;
+    }
+    public Weapon getWeapon() {
+        return weapon;
+    }
+    public Armour getArmour() {
+        return armour;
+    }
 
     //Setters
     public void setX(int x) {
@@ -28,6 +37,17 @@ public class enemy extends Creature{
     }
     public void setY(int y) {
         this.y = y;
+    }
+    public void setEquipments(ArrayList<Equipment> equipments) {
+        this.equipments = equipments;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public void setArmour(Armour armour) {
+        this.armour = armour;
     }
 
     public enemy(String name, int hp, int lvl, int atk, int exp, Weapon equipment1, Armour equipment2, int x, int y){
@@ -38,9 +58,6 @@ public class enemy extends Creature{
         equipments.add(armour);
         this.x = x;
         this.y = y;
-
-
-
     }
 
     public void showStats(){

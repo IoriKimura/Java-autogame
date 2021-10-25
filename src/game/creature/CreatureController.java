@@ -78,6 +78,7 @@ public class CreatureController implements Runnable {
             if(enemy.getHp() <= 0) {
                 enemy.setHp(0);
                 System.out.println("Brutal! You smash him!");
+                GameLogic.pickUp(enemy.getWeapon(), enemy.getArmour());
                 isFight = false;
                 break;
             }
@@ -85,7 +86,9 @@ public class CreatureController implements Runnable {
             while(enemy.getHp() > 0){
                 enemy.setHp(GameLogic.takeDMG(enemy.getHp(), GameLogic.setFullDps(enemy.armour.getArmour(), player.weapon.getDamage(), player.getAtk())));
                 if(enemy.getHp() <= 0) {
+                    enemy.setHp(0);
                     System.out.println("Brutal! You smash him!");
+                    GameLogic.pickUp(enemy.getWeapon(), enemy.getArmour());
                     isFight = false;
                     break;
                 }
@@ -93,7 +96,7 @@ public class CreatureController implements Runnable {
                     player.setHp(GameLogic.takeDMG(player.getHp(), GameLogic.setFullDps((player.armour.getArmour()),enemy.weapon.getDamage(), enemy.getAtk())));
                     if(player.getHp() <= 0) {
                         System.out.println("You was killed... Bruh...");
-                        enemy.setHp(0);
+                        player.setHp(0);
                         GameLogic.setAlive(false);
                         break;
                     }
